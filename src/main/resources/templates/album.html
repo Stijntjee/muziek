@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="nl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${album==null ? 'Album niet gevonden' : album.naam}"></title>
+</head>
+<body>
+<h1 th:if="${album} == null" th:text="|Album ${id} niet gevonden.|"></h1>
+<h1 th:if="${album} != null" th:object="${album}" th:text="|*{naam}
+ (*{artiest.naam})|"></h1>
+<ul th:if="${album} != null">
+    <li th:each="track:${album.tracks}" th:object="${track}"
+        th:text="|*{naam} *{tijd}|"></li>
+</ul>
+<div th:if="${album} != null">Totale tijd:
+    <span th:text="${album.tijd}"></span></div>
+</body>
+</html>
